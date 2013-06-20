@@ -3,10 +3,6 @@ os 							= require 'os'
 
 class CPUProbe extends Probe
 	
-	#constructor: (@probe)
-	#if @probe
-	#	probe = @probe 
-	#else
 	probe = new Probe()
 		
 	probe.listen 'cpu', (req, res) =>

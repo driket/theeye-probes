@@ -4,11 +4,8 @@ sys 						= require 'sys'
 
 
 class BandwidthProbe extends Probe
-	constructor: (@probe)
-	if @probe
-		probe = @probe 
-	else
-		probe = new Probe()
+
+	probe = new Probe()
 	
 	probe.listen 'bandwidth', (req, res) =>
 
