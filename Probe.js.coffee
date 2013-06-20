@@ -4,8 +4,7 @@ Module dependencies
 
 class Probe
 
-	constructor: () ->
-		#init()
+	constructor: (@port) ->
 		
 	@path						= '/'
 	
@@ -19,8 +18,8 @@ class Probe
 	
 	start: ->
 		
-		app.listen(1337)
-		console.log('Server running at http://127.0.0.1:1337/')
+		app.listen(@port)
+		console.log 'Server running at port: ' + @port
 		
 	listen: (path, callback) =>
 		
