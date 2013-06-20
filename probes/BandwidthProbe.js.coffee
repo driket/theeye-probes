@@ -1,4 +1,4 @@
-Probe 					= require "./Probe.js.coffee"
+Probe 					= require "../Probe.js.coffee"
 child_process		= require 'child_process'
 sys 						= require 'sys'
 

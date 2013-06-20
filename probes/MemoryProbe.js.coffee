@@ -1,4 +1,4 @@
-Probe 					= require "./Probe.js.coffee"
+Probe 					= require "../Probe.js.coffee"
 os 							= require 'os'
 
 class MemoryProbe extends Probe
