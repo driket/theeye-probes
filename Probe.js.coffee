@@ -25,7 +25,9 @@ class Probe
 		
 		app.get Probe.path + path, (req, res) ->
 			Probe::send_headers res
-			callback(req, res)
-		
+			try
+				callback(req, res)
+			catch
+				console.log 'error' + callback
 	
 module.exports = Probe
