@@ -7,9 +7,34 @@ class BandwidthProbe extends Probe
 
 	probe = new Probe()
 	
+	fetch_bandwidth: (callback) =>
+		
+		child_process.exec "vnstat -tr", (error, stdout, stderr) =>
+			try
+				lines = stdout.split('\n')
+				rx = lines[3].split(/\s+/g)[2]
+				tx = lines[4].split(/\s+/g)[2]
+				callback(rx, tx)
+			catch err
+				console.log 'error ' + err
+				
+	probe.listen 'bandwidth/tx', (req, res) =>
+		
+		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+
+			res.send JSON.stringify	(	{ 'value' : tx, 'date' : new Date() } )
+			
+	probe.listen 'bandwidth/rx', (req, res) =>
+
+		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+
+			res.send JSON.stringify	(	{ 'value' : rx, 'date' : new Date() } )
+	
 	probe.listen 'bandwidth', (req, res) =>
 
-		child_process.exec "vnstat -tr", (error, stdout, stderr) =>
-			console.log stdout
-		res.send 'bandwidth'
-#		res.send(JSON.stringify(json))
+		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+			total = parseFloat(tx) + parseFloat(rx)
+			res.send JSON.stringify	(	
+				{ 'value' : total, 
+				'details' : {'rx' : rx + ' kB/s', 'tx' : tx + ' kB/s'}, 'date' : new Date() } 
+			)
