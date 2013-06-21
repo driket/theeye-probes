@@ -27,15 +27,5 @@ class Probe
 			Probe::send_headers res
 			callback(req, res)
 		
-
-#probe = new Probe()
-#probe.init()
-#return probe
-#MemoryProbe 					= require "./MemoryProbe.js.coffee"
-
-
-#probe.listen '', (req, res) =>
-		
-#		res.send 'The Eye : Probes'
 	
 module.exports = Probe
