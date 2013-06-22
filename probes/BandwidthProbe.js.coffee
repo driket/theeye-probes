@@ -35,6 +35,6 @@ class BandwidthProbe extends Probe
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 			total = parseFloat(tx) + parseFloat(rx)
 			res.send JSON.stringify	(	
-				{ 'value' : total, 
+				{ 'value' : total.toFixed(2), 
 				'details' : {'rx' : rx + ' kB/s', 'tx' : tx + ' kB/s'}, 'date' : new Date() } 
 			)
