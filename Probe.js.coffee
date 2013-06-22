@@ -4,17 +4,27 @@ Module dependencies
 
 class Probe
 
-	constructor: (@port) ->
-		
+	constructor: (port, domains) ->
+		@port = port
+		@domains = domains
+			
 	@path						= '/'
 	
 	express 				= require 'express'
 	app	 						= module.exports = express()
 
-	send_headers: (res) =>
+	@set_domains: (domains) ->
+		console.log 'set domains ' + domains
+		@domains = domains
+
+
+	send_headers = (req, res) =>
 	
 		res.setHeader 'Content-Type', 'application/json'
-		res.setHeader 'Access-Control-Allow-Origin', 'http://localhost:3000'
+		for domain in @domains.split ' '
+			if domain == req.headers.origin
+				res.setHeader 'Access-Control-Allow-Origin', domain
+		
 	
 	start: ->
 		
@@ -24,10 +34,14 @@ class Probe
 	listen: (path, callback) =>
 		
 		app.get Probe.path + path, (req, res) ->
-			Probe::send_headers res
+			
+			send_headers req, res
 			try
 				callback(req, res)
 			catch
 				console.log 'error' + callback
+				
+	#listen '', (req, res) =>
+	#	console.log 'domains:' + @domains
 	
 module.exports = Probe
