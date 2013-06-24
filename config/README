@@ -1,0 +1,5 @@
+# TheEye Probe conf file
+# ---
+# copy config.json.example -> config.json
+# edit it
+# restart probe
