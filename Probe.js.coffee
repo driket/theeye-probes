@@ -24,6 +24,8 @@ class Probe
 		for domain in @domains.split ' '
 			if domain == req.headers.origin
 				res.setHeader 'Access-Control-Allow-Origin', domain
+				return
+		res.status(401).send('not authorized')
 		
 	
 	start: ->
