@@ -14,7 +14,6 @@ class Probe
 	app	 						= module.exports = express()
 
 	@set_domains: (domains) ->
-		console.log 'set domains ' + domains
 		@domains = domains
 
 
