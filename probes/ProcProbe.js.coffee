@@ -21,15 +21,18 @@ class ProcProbe extends Probe
 
 	
 	fetch_ps: (vm_host = '', callback) =>
-		child_process.exec "ps auxc", (error, stdout, stderr) =>
+		
+		if vm_host == 'lxc'
+			col			=	1
+			ps_command = 'lxc-ps auxc'	
+		else
+			col		=	0
+			ps_command = 'ps auxc'	
+			
+		child_process.exec ps_command, (error, stdout, stderr) =>
 			processes = []
 			try
-				lines = stdout.split('\n')
-				if vm_host == 'lxc'
-					col		=	1
-				else
-					col		=	0
-				
+				lines = stdout.split('\n')				
 				for line in lines
 					cpu 			= line.split(/\s+/g)[col+2]
 					mem 			= line.split(/\s+/g)[col+3]
@@ -48,7 +51,6 @@ class ProcProbe extends Probe
 								'usage'		:	usage,
 								'command'	:	command,
 							}
-
 				processes.sort (a,b) ->
 					ProcProbe::sortBy('usage',a,b,true)
 
