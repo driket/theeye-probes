@@ -23,8 +23,13 @@ class ProcProbe extends Probe
 	fetch_ps: (vm_host = '', callback) =>
 		
 		if vm_host == 'lxc'
-			col			=	1
-			ps_command = 'lxc-ps auxc'	
+			col					=	1
+			ps_command 	= 'lxc-ps auxc'	
+			
+		else if vm_host == 'lxc-ubuntu'
+			col 				=	1
+			ps_command	= 'lxc-ps --lxc -- auxc'
+			
 		else
 			col		=	0
 			ps_command = 'ps auxc'	
@@ -41,7 +46,7 @@ class ProcProbe extends Probe
 						mem			= parseFloat(mem.replace(',','.'))
 						if cpu >= 0 and cpu <= 100 and mem >= 0 and mem <= 100
 							usage			= parseFloat((mem + cpu).toFixed(2))
-							if vm_host == 'lxc'
+							if vm_host == 'lxc' or vm_host == 'lxc-ubuntu'
 								command 	= line.split(/\s+/g)[col+10]+'('+line.split(/\s+/g)[0]+')'
 							else
 								command 	= line.split(/\s+/g)[col+10]
@@ -78,6 +83,15 @@ class ProcProbe extends Probe
 	probe.listen 'lxc-ps', (req, res) =>
 
 		ProcProbe::fetch_ps 'lxc', (proc_count, details) =>
+			res.send JSON.stringify	(	
+				{ 'value' : proc_count, 
+				'details' : details,
+				'date' 		: new Date() }
+			)
+			
+	probe.listen 'lxc-ps-ubuntu', (req, res) =>
+
+		ProcProbe::fetch_ps 'lxc-ubuntu', (proc_count, details) =>
 			res.send JSON.stringify	(	
 				{ 'value' : proc_count, 
 				'details' : details,
