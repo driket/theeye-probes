@@ -4,11 +4,16 @@ sys 						= require 'sys'
 os							= require 'os'
 
 
-class LoadAvgProbe extends Probe
+class load_avg extends Probe
 
-	probe = new Probe('loadavg')
+	probe = new Probe {
+		path: 				this.name,
+		title:				'Load average',
+		description:	'Monitor number of threads in the queue / proc',
+	}
+
 	
-	probe.listen 'info', (req, res) =>
+	probe.listen 'index', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[
