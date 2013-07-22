@@ -3,9 +3,58 @@ child_process		= require 'child_process'
 sys 						= require 'sys'
 
 
-class ProcProbe extends Probe
+class procs extends Probe
 
-	probe = new Probe()
+	probe = new Probe('procs')
+
+	probe.listen 'info', (req, res) =>
+	
+		res.send JSON.stringify	(
+			[
+				{ 
+					'title'				: 'Processes count',
+					'unit'				: 'procs',
+					'uri'					: 'ps',
+				},
+				{ 
+					'title'				: 'Processes count - lxc',
+					'unit'				: 'procs',
+					'uri'					: 'lxc-ps',
+				},
+				{ 
+					'title'				: 'Processes count - lxc (ubuntu)',
+					'unit'				: 'procs',
+					'uri'					: 'lxc-ps-ubuntu',
+				},
+			]
+		)
+		
+	probe.listen 'ps', (req, res) =>
+
+		ProcProbe::fetch_ps '', (proc_count, details) =>
+			res.send JSON.stringify	(	
+				{ 'value' : proc_count, 
+				'details' : details,
+				'date' 		: new Date() }
+			)
+			
+	probe.listen 'lxc-ps', (req, res) =>
+
+		ProcProbe::fetch_ps 'lxc', (proc_count, details) =>
+			res.send JSON.stringify	(	
+				{ 'value' : proc_count, 
+				'details' : details,
+				'date' 		: new Date() }
+			)
+			
+	probe.listen 'lxc-ps-ubuntu', (req, res) =>
+
+		ProcProbe::fetch_ps 'lxc-ubuntu', (proc_count, details) =>
+			res.send JSON.stringify	(	
+				{ 'value' : proc_count, 
+				'details' : details,
+				'date' 		: new Date() }
+			)
 	
 	Object.size = (obj) =>
 		size = 0
@@ -71,29 +120,3 @@ class ProcProbe extends Probe
 			catch err
 				console.log 'error ' + err
 	
-	probe.listen 'ps', (req, res) =>
-
-		ProcProbe::fetch_ps '', (proc_count, details) =>
-			res.send JSON.stringify	(	
-				{ 'value' : proc_count, 
-				'details' : details,
-				'date' 		: new Date() }
-			)
-			
-	probe.listen 'lxc-ps', (req, res) =>
-
-		ProcProbe::fetch_ps 'lxc', (proc_count, details) =>
-			res.send JSON.stringify	(	
-				{ 'value' : proc_count, 
-				'details' : details,
-				'date' 		: new Date() }
-			)
-			
-	probe.listen 'lxc-ps-ubuntu', (req, res) =>
-
-		ProcProbe::fetch_ps 'lxc-ubuntu', (proc_count, details) =>
-			res.send JSON.stringify	(	
-				{ 'value' : proc_count, 
-				'details' : details,
-				'date' 		: new Date() }
-			)
