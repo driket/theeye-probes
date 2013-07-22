@@ -1,11 +1,15 @@
 Probe 					= require "../Probe.js.coffee"
 os 							= require 'os'
 
-class CPUProbe extends Probe
+class cpu extends Probe
 	
-	probe = new Probe('cpu')
-		
-	probe.listen 'info', (req, res) =>
+	probe = new Probe {
+		path: 				this.name,
+		title:				'CPU usage',
+		description:	'Monitor CPU usage (user, nice, system, idle, etc.)',
+	}
+	
+	probe.listen 'index', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[
