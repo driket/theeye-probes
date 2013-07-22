@@ -3,9 +3,21 @@ os 							= require 'os'
 
 class MemoryProbe extends Probe
 
-	probe = new Probe()
+	probe = new Probe('memory')
 	
-	probe.listen 'memory', (req, res) =>
+	probe.listen 'info', (req, res) =>
+	
+		res.send JSON.stringify	(
+			[
+				{ 
+					'title'				: 'Memory usage',
+					'unit'				: '%',
+					'uri'					: 'usage',
+				},
+			]
+		)
+		
+	probe.listen 'usage', (req, res) =>
 		used_mem 	= os.totalmem()-os.freemem()
 		mem_usage = Math.round( used_mem / os.totalmem() * 100 )
 		free_mem 	= Math.round(os.freemem() / 1000000)
