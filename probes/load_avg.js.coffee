@@ -11,7 +11,6 @@ class load_avg extends Probe
 		title:				'Load average',
 		description:	'Monitor number of threads in the queue / proc',
 	}
-
 	
 	probe.listen 'index', (req, res) =>
 	
