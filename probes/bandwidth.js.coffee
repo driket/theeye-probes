@@ -5,9 +5,14 @@ sys 						= require 'sys'
 
 class bandwidth extends Probe
 	
-	probe = new Probe('bandwidth')
+	probe = new Probe {
+		path: 				this.name,
+		title:				'Bandwidth usage',
+		description:	'Monitor bandwidth usage (transmission, reception, both)',
+	}
+	
 		
-	probe.listen 'info', (req, res) =>
+	probe.listen 'index', (req, res) =>
 		console.log "bandwith descriptor"
 		res.send JSON.stringify	(
 			[
