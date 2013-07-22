@@ -3,7 +3,7 @@ child_process		= require 'child_process'
 sys 						= require 'sys'
 
 
-class procs extends Probe
+class proc extends Probe
 
 	probe = new Probe {
 		path: 				this.name,
