@@ -3,7 +3,11 @@ os 							= require 'os'
 
 class MemoryProbe extends Probe
 
-	probe = new Probe('memory')
+	probe = new Probe {
+		path: 				this.name,
+		title:				'Memory usage',
+		description:	'Monitor memory usage',
+	}
 	
 	probe.listen 'info', (req, res) =>
 	
