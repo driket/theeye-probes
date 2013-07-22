@@ -4,10 +4,15 @@ Module dependencies
 
 class Probe
 
-	constructor: (port, domains) ->
+	constructor: (type, port, domains) ->
 		@port = port
 		@domains = domains
-			
+		@type = type
+		console.log 'constructor: ' + @type
+
+	#constructor: (type) ->
+	#	@type = type
+	
 	@path						= '/'
 	
 	express 				= require 'express'
@@ -34,7 +39,12 @@ class Probe
 		
 	listen: (path, callback) =>
 		
-		app.get Probe.path + path, (req, res) ->
+		if !@type 
+			listen_path = path
+		else
+			listen_path = Probe.path + @type + '/' + path
+		console.log 'listening ' + listen_path  
+		app.get listen_path, (req, res) ->
 			
 			send_headers req, res
 			try
