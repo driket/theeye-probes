@@ -18,19 +18,19 @@ class BandwidthProbe extends Probe
 			catch err
 				console.log 'error ' + err
 				
-	probe.listen 'bandwidth/tx', (req, res) =>
+	probe.listen 'BandwidthProbe/tx', (req, res) =>
 		
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : tx, 'date' : new Date() } )
 			
-	probe.listen 'bandwidth/rx', (req, res) =>
+	probe.listen 'BandwidthProbe/rx', (req, res) =>
 
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : rx, 'date' : new Date() } )
 	
-	probe.listen 'bandwidth', (req, res) =>
+	probe.listen 'BandwidthProbe', (req, res) =>
 
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 			total = parseFloat(tx) + parseFloat(rx)
