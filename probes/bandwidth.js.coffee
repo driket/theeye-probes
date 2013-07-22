@@ -7,27 +7,27 @@ class BandwidthProbe extends Probe
 
 	probe = new Probe()
 	
-	fetch_bandwidth: (callback) =>
-		
-		child_process.exec "vnstat -tr", (error, stdout, stderr) =>
-			try
-				lines = stdout.split('\n')
-				rx = lines[3].split(/\s+/g)[2]
-				tx = lines[4].split(/\s+/g)[2]
-				callback(rx, tx)
-			catch err
-				console.log 'error ' + err
-				
-				
 	probe.listen 'bandwidth', (req, res) =>
 		
 		res.send JSON.stringify	(
-			{
-				'Transmission (kB/s)'		: 'tx',
-				'Reception (kB/s)'			: 'rx',
-				'All (kB/s)'						: 'all',
-			}
-		)
+			[
+				{ 
+					'title'				: 'Transmission',
+					'unit'				: '(kB/s)',
+					'uri'					: 'tx',
+				},
+				{ 
+					'title'				: 'Reception',
+					'unit'				: '(kB/s)',
+					'uri'					: 'rx',
+				},
+				{ 
+					'title'				: 'All',
+					'unit'				: '(kB/s)',
+					'uri'					: 'all',
+				},				
+			]
+		)	
 		
 	probe.listen 'bandwidth/tx', (req, res) =>
 		
@@ -49,3 +49,15 @@ class BandwidthProbe extends Probe
 				{ 'value' : total.toFixed(2), 
 				'details' : {'rx' : rx + ' kB/s', 'tx' : tx + ' kB/s'}, 'date' : new Date() } 
 			)
+			
+			
+	fetch_bandwidth: (callback) =>
+		
+		child_process.exec "vnstat -tr", (error, stdout, stderr) =>
+			try
+				lines = stdout.split('\n')
+				rx = lines[3].split(/\s+/g)[2]
+				tx = lines[4].split(/\s+/g)[2]
+				callback(rx, tx)
+			catch err
+				console.log 'error ' + err
