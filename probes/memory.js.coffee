@@ -9,7 +9,7 @@ class MemoryProbe extends Probe
 		description:	'Monitor memory usage',
 	}
 	
-	probe.listen 'info', (req, res) =>
+	probe.listen 'index', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[
