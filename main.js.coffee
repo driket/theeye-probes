@@ -37,3 +37,11 @@ console.log 'config: ', settings
 probe = new Probe(settings.port)
 Probe.set_domains settings.authorized_hosts
 probe.start()
+
+probe.listen 'hello', (req, res) =>
+	app_details = { 
+		'name' 		: 'theeye-probes', 
+		'version' : 'beta'
+	}
+	res.send JSON.stringify	(app_details)
+	console.log 'app details: ', app_details
