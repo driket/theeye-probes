@@ -5,6 +5,39 @@ class CPUProbe extends Probe
 	
 	probe = new Probe()
 		
+	probe.listen 'cpu', (req, res) =>
+	
+		res.send JSON.stringify	(
+			[
+				{ 
+					'title'				: 'CPU Usage',
+					'unit'				: '%',
+					'uri'					: 'all',
+				},
+			]
+		)
+
+	probe.listen 'all', (req, res) =>
+		
+		# get current cpu times
+		
+		old_times = fetch_cpus_times()
+		
+		
+		# get new cpu times after 1 second
+		
+		setTimeout =>
+			
+			new_times = fetch_cpus_times()
+			elapsed_times = diff_times old_times, new_times
+			
+			# send json with monitored value + details
+
+			res.send JSON.stringify	(
+				probe_format (percent_times (elapsed_times))
+			)
+		, 1000
+	
 		
 	# get current times for cpus
 	
@@ -81,25 +114,6 @@ class CPUProbe extends Probe
 			'date'		: times.date
 		}
 		
-	probe.listen 'cpu', (req, res) =>
-		
-		# get current cpu times
-		
-		old_times = fetch_cpus_times()
 		
 		
-		# get new cpu times after 1 second
-		
-		setTimeout =>
-			
-			new_times = fetch_cpus_times()
-			elapsed_times = diff_times old_times, new_times
-			
-			# send json with monitored value + details
-
-			res.send JSON.stringify	(
-				probe_format (percent_times (elapsed_times))
-			)
-		, 1000
-			
 		
