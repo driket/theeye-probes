@@ -3,9 +3,9 @@ os 							= require 'os'
 
 class CPUProbe extends Probe
 	
-	probe = new Probe()
+	probe = new Probe('cpu')
 		
-	probe.listen 'cpu', (req, res) =>
+	probe.listen 'info', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[
@@ -17,7 +17,7 @@ class CPUProbe extends Probe
 			]
 		)
 
-	probe.listen 'cpu/all', (req, res) =>
+	probe.listen 'all', (req, res) =>
 		
 		# get current cpu times
 		
