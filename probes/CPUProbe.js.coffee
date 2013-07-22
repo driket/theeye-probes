@@ -17,7 +17,7 @@ class CPUProbe extends Probe
 			]
 		)
 
-	probe.listen 'all', (req, res) =>
+	probe.listen 'cpu/all', (req, res) =>
 		
 		# get current cpu times
 		
