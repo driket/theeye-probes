@@ -6,9 +6,9 @@ os							= require 'os'
 
 class LoadAvgProbe extends Probe
 
-	probe = new Probe()
+	probe = new Probe('loadavg')
 	
-	probe.listen 'loadavg', (req, res) =>
+	probe.listen 'info', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[
