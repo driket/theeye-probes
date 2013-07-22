@@ -3,12 +3,12 @@ child_process		= require 'child_process'
 sys 						= require 'sys'
 
 
-class BandwidthProbe extends Probe
-
-	probe = new Probe()
+class bandwidth extends Probe
 	
-	probe.listen 'bandwidth', (req, res) =>
+	probe = new Probe('bandwidth')
 		
+	probe.listen 'info', (req, res) =>
+		console.log "bandwith descriptor"
 		res.send JSON.stringify	(
 			[
 				{ 
@@ -29,19 +29,19 @@ class BandwidthProbe extends Probe
 			]
 		)	
 		
-	probe.listen 'bandwidth/tx', (req, res) =>
+	probe.listen 'tx', (req, res) =>
 		
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : tx, 'date' : new Date() } )
 			
-	probe.listen 'bandwidth/rx', (req, res) =>
+	probe.listen 'rx', (req, res) =>
 
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : rx, 'date' : new Date() } )
 	
-	probe.listen 'bandwidth/all', (req, res) =>
+	probe.listen 'all', (req, res) =>
 
 		BandwidthProbe::fetch_bandwidth (rx, tx) =>
 			total = parseFloat(tx) + parseFloat(rx)
