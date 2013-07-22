@@ -1,7 +1,7 @@
 Probe 					= require "../Probe.js.coffee"
 os 							= require 'os'
 
-class MemoryProbe extends Probe
+class memory extends Probe
 
 	probe = new Probe {
 		path: 				this.name,
