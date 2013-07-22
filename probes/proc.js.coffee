@@ -5,9 +5,13 @@ sys 						= require 'sys'
 
 class procs extends Probe
 
-	probe = new Probe('procs')
+	probe = new Probe {
+		path: 				this.name,
+		title:				'Processes count',
+		description:	'Monitor processes count',
+	}
 
-	probe.listen 'info', (req, res) =>
+	probe.listen 'index', (req, res) =>
 	
 		res.send JSON.stringify	(
 			[

@@ -10,7 +10,6 @@ class bandwidth extends Probe
 		title:				'Bandwidth usage',
 		description:	'Monitor bandwidth usage (transmission, reception, both)',
 	}
-	
 		
 	probe.listen 'index', (req, res) =>
 		console.log "bandwith descriptor"
