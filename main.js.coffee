@@ -4,15 +4,17 @@ Probe 					= require "./Probe.js.coffee"
 # defaults
 
 config_file			=	"config/config.json"
-
+probes					= []
 
 # load probes 
 
 fs.readdir './probes', (err, files) =>
 
 	for file in files
-
+		
 		require "./probes/" + file
+		probe_name = file.replace('.js.coffee', '')
+		probes.push probe_name
 
 
 # create and lauch server
@@ -34,7 +36,7 @@ console.log 'config: ', settings
 
 # launch probe 
 
-probe = new Probe(settings.port)
+probe = new Probe('probe', settings.port)
 Probe.set_domains settings.authorized_hosts
 probe.start()
 
@@ -44,5 +46,6 @@ probe.listen 'info', (req, res) =>
 		'version' : 'beta'
 	}
 	res.send JSON.stringify	(app_details)
-	console.log 'app details: ', app_details
 	
+probe.listen 'probes', (req, res) =>
+	res.send JSON.stringify	(probes)
