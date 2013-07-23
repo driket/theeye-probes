@@ -25,6 +25,7 @@ class Probe
 
 	send_headers = (req, res) =>
 	
+		#console.log 'host: ', req.headers.origin
 		res.setHeader 'Content-Type', 'application/json'
 		for domain in @domains.split ' '
 			if domain == req.headers.origin
@@ -50,8 +51,8 @@ class Probe
 			send_headers req, res
 			try
 				callback(req, res)
-			catch
-				console.log 'error' + callback
+			catch err
+				console.log 'error:' + err
 				
 	#listen '', (req, res) =>
 	#	console.log 'domains:' + @domains
