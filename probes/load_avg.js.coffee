@@ -26,27 +26,27 @@ class load_avg extends Probe
 		
 	probe.listen 'load', (req, res) =>
 
-		LoadProbe::fetch_ps '', (load_avg, details) =>
+		load_avg::fetch_ps '', (load_avg_value, details) =>
 			res.send JSON.stringify	(	
-				{ 'value' : load_avg, 
+				{ 'value' : load_avg_value, 
 				'details' : details,
 				'date' 		: new Date() }
 			)
 			
 	probe.listen 'load-lxc', (req, res) =>
 
-		LoadProbe::fetch_ps 'lxc', (load_avg, details) =>
+		load_avg::fetch_ps 'lxc', (load_avg_value, details) =>
 			res.send JSON.stringify	(	
-				{ 'value' : load_avg, 
+				{ 'value' : load_avg_value, 
 				'details' : details,
 				'date' 		: new Date() }
 			)
 			
 	probe.listen 'load-lxc-ubuntu', (req, res) =>
 
-		LoadProbe::fetch_ps 'lxc-ubuntu', (load_avg, details) =>
+		load_avg::fetch_ps 'lxc-ubuntu', (load_avg_value, details) =>
 			res.send JSON.stringify	(	
-				{ 'value' : load_avg, 
+				{ 'value' : load_avg_value, 
 				'details' : details,
 				'date' 		: new Date() }
 			)
@@ -67,9 +67,9 @@ class load_avg extends Probe
 	
 	fetch_ps: (vm_host = '', callback) =>
 		
-		os_load_avg 	= os.loadavg()
-		cpus					=	os.cpus().length
-		load_avg			= (os_load_avg[0] / cpus).toFixed(2)
+		os_load_avg 		= os.loadavg()
+		cpus						=	os.cpus().length
+		load_avg_value	= (os_load_avg[0] / cpus).toFixed(2)
 		
 		if vm_host == 'lxc'
 			col					=	1
@@ -106,7 +106,7 @@ class load_avg extends Probe
 								'command'	:	command,
 							}
 				processes.sort (a,b) ->
-					LoadProbe::sortBy('usage',a,b,true)
+					load_avg::sortBy('usage',a,b,true)
 
 				index = 0
 				details =	
@@ -120,7 +120,7 @@ class load_avg extends Probe
 						#console.log 'proc', proc
 					index++
 					
-				callback(load_avg, details)
+				callback(load_avg_value, details)
 			catch err
 				console.log 'error ' + err
 	
