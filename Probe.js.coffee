@@ -26,7 +26,6 @@ class Probe
 	send_headers = (req, res) =>
 	
 		origin = req.headers.origin || req.headers.host
-		console.log 'host: ', origin
 		res.setHeader 'Content-Type', 'application/json'
 		for domain in @domains.split ' '
 			if domain == origin 
