@@ -35,7 +35,7 @@ class proc extends Probe
 		
 	probe.listen 'ps', (req, res) =>
 
-		ProcProbe::fetch_ps '', (proc_count, details) =>
+		proc::fetch_ps '', (proc_count, details) =>
 			res.send JSON.stringify	(	
 				{ 'value' : proc_count, 
 				'details' : details,
@@ -44,7 +44,7 @@ class proc extends Probe
 			
 	probe.listen 'lxc-ps', (req, res) =>
 
-		ProcProbe::fetch_ps 'lxc', (proc_count, details) =>
+		proc::fetch_ps 'lxc', (proc_count, details) =>
 			res.send JSON.stringify	(	
 				{ 'value' : proc_count, 
 				'details' : details,
@@ -53,7 +53,7 @@ class proc extends Probe
 			
 	probe.listen 'lxc-ps-ubuntu', (req, res) =>
 
-		ProcProbe::fetch_ps 'lxc-ubuntu', (proc_count, details) =>
+		proc::fetch_ps 'lxc-ubuntu', (proc_count, details) =>
 			res.send JSON.stringify	(	
 				{ 'value' : proc_count, 
 				'details' : details,
@@ -110,7 +110,7 @@ class proc extends Probe
 								'command'	:	command,
 							}
 				processes.sort (a,b) ->
-					ProcProbe::sortBy('usage',a,b,true)
+					proc::sortBy('usage',a,b,true)
 
 				index = 0
 				details 	=	{'CPU/MEM':'COMMAND'}
