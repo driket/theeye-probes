@@ -47,5 +47,5 @@ probe.listen 'info', (req, res) =>
 	}
 	res.send JSON.stringify	(app_details)
 	
-probe.listen 'probes', (req, res) =>
+probe.listen 'index', (req, res) =>
 	res.send JSON.stringify	(probes)
