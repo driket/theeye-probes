@@ -15,17 +15,17 @@ class bandwidth extends Probe
 		res.send JSON.stringify	(
 			[
 				{ 
-					'title'				: 'Transmission',
+					'title'				: 'Bandwidth - transmission',
 					'unit'				: '(kB/s)',
 					'uri'					: 'tx',
 				},
 				{ 
-					'title'				: 'Reception',
+					'title'				: 'Bandwidth - reception',
 					'unit'				: '(kB/s)',
 					'uri'					: 'rx',
 				},
 				{ 
-					'title'				: 'All',
+					'title'				: 'Bandwidth - total',
 					'unit'				: '(kB/s)',
 					'uri'					: 'all',
 				},				
@@ -61,6 +61,10 @@ class bandwidth extends Probe
 				lines = stdout.split('\n')
 				rx = lines[3].split(/\s+/g)[2]
 				tx = lines[4].split(/\s+/g)[2]
+				if lines[3].split(/\s+/g)[3] == "MB/s"
+					rx = rx * 1024
+				if lines[4].split(/\s+/g)[3] == "MB/s"
+					tx = tx * 1024	
 				callback(rx, tx)
 			catch err
 				console.log 'error ' + err
