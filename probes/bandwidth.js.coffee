@@ -34,19 +34,19 @@ class bandwidth extends Probe
 		
 	probe.listen 'tx', (req, res) =>
 		
-		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+		bandwidth::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : tx, 'date' : new Date() } )
 			
 	probe.listen 'rx', (req, res) =>
 
-		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+		bandwidth::fetch_bandwidth (rx, tx) =>
 
 			res.send JSON.stringify	(	{ 'value' : rx, 'date' : new Date() } )
 	
 	probe.listen 'all', (req, res) =>
 
-		BandwidthProbe::fetch_bandwidth (rx, tx) =>
+		bandwidth::fetch_bandwidth (rx, tx) =>
 			total = parseFloat(tx) + parseFloat(rx)
 			res.send JSON.stringify	(	
 				{ 'value' : total.toFixed(2), 
