@@ -16,17 +16,17 @@ class bandwidth extends Probe
 			[
 				{ 
 					'title'				: 'Bandwidth - transmission',
-					'unit'				: '(kB/s)',
+					'unit'				: 'kB/s',
 					'uri'					: 'tx',
 				},
 				{ 
 					'title'				: 'Bandwidth - reception',
-					'unit'				: '(kB/s)',
+					'unit'				: 'kB/s',
 					'uri'					: 'rx',
 				},
 				{ 
 					'title'				: 'Bandwidth - total',
-					'unit'				: '(kB/s)',
+					'unit'				: 'kB/s',
 					'uri'					: 'all',
 				},				
 			]
