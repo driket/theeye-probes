@@ -114,9 +114,9 @@ class proc extends Probe
 
 				index = 0
 				details 	=	{'CPU/MEM':'COMMAND'}
-				for proc in processes
+				for process in processes
 					if index < 8
-						details[proc.cpu + '/' + proc.mem] = proc.command 
+						details[process.cpu + '/' + process.mem] = process.command 
 						#console.log 'proc', proc
 					index++
 					
