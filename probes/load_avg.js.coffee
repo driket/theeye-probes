@@ -19,7 +19,17 @@ class load_avg extends Probe
 				{ 
 					'title'				: 'Load average',
 					'unit'				: 'thread',
-					'uri'					: 'all',
+					'uri'					: 'load',
+				},
+				{ 
+					'title'				: 'Load average - lxc',
+					'unit'				: 'thread',
+					'uri'					: 'load-lxc',
+				},
+				{ 
+					'title'				: 'Load average - lxc/ubuntu',
+					'unit'				: 'thread',
+					'uri'					: 'load-lxc-ubuntu',
 				},
 			]
 		)
