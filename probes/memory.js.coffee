@@ -17,6 +17,13 @@ class memory extends Probe
 					'title'				: 'Memory usage',
 					'unit'				: '%',
 					'uri'					: 'usage',
+					'min'					:	'0',
+					'max'					:	'100',
+					'interval'		: '2',
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'98', 'type'=>'alert'},
+						{'operator':'>=', 'value':'95', 'type'=>'warning'},
+					],
 				},
 			]
 		)
