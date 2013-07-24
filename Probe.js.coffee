@@ -31,6 +31,7 @@ class Probe
 			if domain == origin 
 				res.setHeader 'Access-Control-Allow-Origin', domain
 				return
+		console.log "origin : " + origin + " is not authorized in config file"
 		res.status(401).send('not authorized')
 		
 	
