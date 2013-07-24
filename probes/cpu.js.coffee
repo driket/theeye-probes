@@ -17,6 +17,13 @@ class cpu extends Probe
 					'title'				: 'CPU Usage',
 					'unit'				: '%',
 					'uri'					: 'all',
+					'min'					:	'0',
+					'max'					:	'100',
+					'interval'		: '2',
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'99', 'type'=>'alert'},
+						{'operator':'>=', 'value':'90', 'type'=>'warning'},
+					],
 				},
 			]
 		)
