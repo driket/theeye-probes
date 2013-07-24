@@ -20,16 +20,37 @@ class load_avg extends Probe
 					'title'				: 'Load average',
 					'unit'				: 'thread',
 					'uri'					: 'load',
+					'min'					:	'0',
+					'max'					:	'5',
+					'interval'		: '2',
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
+						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+					],
 				},
 				{ 
 					'title'				: 'Load average - lxc',
 					'unit'				: 'thread',
 					'uri'					: 'load-lxc',
+					'min'					:	'0',
+					'max'					:	'5',
+					'interval'		: '2',
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
+						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+					],
 				},
 				{ 
 					'title'				: 'Load average - lxc/ubuntu',
 					'unit'				: 'thread',
 					'uri'					: 'load-lxc-ubuntu',
+					'min'					:	'0',
+					'max'					:	'5',
+					'interval'		: '2',
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
+						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+					],
 				},
 			]
 		)
