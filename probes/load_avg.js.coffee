@@ -24,8 +24,8 @@ class load_avg extends Probe
 					'max'					:	'5',
 					'interval'		: '2',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
-						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+						{'operator':'>=', 'value':'1.0', 'type':'alert'},
+						{'operator':'>=', 'value':'0.7', 'type':'warning'},
 					],
 				},
 				{ 
@@ -36,8 +36,8 @@ class load_avg extends Probe
 					'max'					:	'5',
 					'interval'		: '2',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
-						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+						{'operator':'>=', 'value':'1.0', 'type':'alert'},
+						{'operator':'>=', 'value':'0.7', 'type':'warning'},
 					],
 				},
 				{ 
@@ -48,8 +48,8 @@ class load_avg extends Probe
 					'max'					:	'5',
 					'interval'		: '2',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'1.0', 'type'=>'alert'},
-						{'operator':'>=', 'value':'0.7', 'type'=>'warning'},
+						{'operator':'>=', 'value':'1.0', 'type':'alert'},
+						{'operator':'>=', 'value':'0.7', 'type':'warning'},
 					],
 				},
 			]
