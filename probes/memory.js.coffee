@@ -21,8 +21,8 @@ class memory extends Probe
 					'max'					:	'100',
 					'interval'		: '2',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'98', 'type'=>'alert'},
-						{'operator':'>=', 'value':'95', 'type'=>'warning'},
+						{'operator':'>=', 'value':'98', 'type':'alert'},
+						{'operator':'>=', 'value':'95', 'type':'warning'},
 					],
 				},
 			]
