@@ -19,16 +19,28 @@ class proc extends Probe
 					'title'				: 'Processes count',
 					'unit'				: 'procs',
 					'uri'					: 'ps',
+					'min'					:	'0',
+					'max'					:	'600',
+					'interval'		: '2',
+					'thresholds'	:	[],
 				},
 				{ 
 					'title'				: 'Processes count - lxc',
 					'unit'				: 'procs',
 					'uri'					: 'lxc-ps',
+					'min'					:	'0',
+					'max'					:	'600',
+					'interval'		: '2',
+					'thresholds'	:	[],
 				},
 				{ 
 					'title'				: 'Processes count - lxc (ubuntu)',
 					'unit'				: 'procs',
 					'uri'					: 'lxc-ps-ubuntu',
+					'min'					:	'0',
+					'max'					:	'600',
+					'interval'		: '2',
+					'thresholds'	:	[],
 				},
 			]
 		)
