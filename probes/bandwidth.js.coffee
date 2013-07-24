@@ -18,16 +18,28 @@ class bandwidth extends Probe
 					'title'				: 'Bandwidth - transmission',
 					'unit'				: 'kB/s',
 					'uri'					: 'tx',
+					'min'					:	'0',
+					'max'					:	'10000',
+					'interval'		: '5',
+					'thresholds'	:	[],
 				},
 				{ 
 					'title'				: 'Bandwidth - reception',
 					'unit'				: 'kB/s',
 					'uri'					: 'rx',
+					'min'					:	'0',
+					'max'					:	'10000',
+					'interval'		: '5',
+					'thresholds'	:	[],
 				},
 				{ 
 					'title'				: 'Bandwidth - total',
 					'unit'				: 'kB/s',
 					'uri'					: 'all',
+					'min'					:	'0',
+					'max'					:	'10000',
+					'interval'		: '5',
+					'thresholds'	:	[],
 				},				
 			]
 		)	
