@@ -44,7 +44,7 @@ class security_updates extends Probe
 	fetch_updates: (callback) =>
 		
 		child_process.exec "/usr/lib/update-notifier/apt-check", (error, stdout, stderr) =>
-		stdout = stderr if !stdout 
+			stdout = stderr if !stdout 
 			try
 				values = stdout.split(';')
 				packages = values[0]
