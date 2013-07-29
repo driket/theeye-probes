@@ -33,8 +33,8 @@ class security_updates extends Probe
 				{ 
 					'value' : security, 
 					'details' : {
-						security : security + ' update is a security update', 
-						packages : packages + ' package(s) can be updated'
+						security : security + ' updates', 
+						packages : packages + ' updates'
 					}, 
 					'date' : new Date()
 				} 
@@ -44,6 +44,7 @@ class security_updates extends Probe
 	fetch_updates: (callback) =>
 		
 		child_process.exec "/usr/lib/update-notifier/apt-check", (error, stdout, stderr) =>
+		stdout = stderr if !stdout 
 			try
 				values = stdout.split(';')
 				packages = values[0]
