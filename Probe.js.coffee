@@ -25,11 +25,11 @@ class Probe
 
 	send_headers = (req, res) =>
 	
-		origin = req.headers.origin || req.headers.host
+		origin = req.get('origin')
 		res.setHeader 'Content-Type', 'application/json'
 		for domain in @domains.split ' '
 			if domain == origin 
-				res.setHeader 'Access-Control-Allow-Origin', domain
+				res.set 'Access-Control-Allow-Origin', domain
 				return
 		console.log "origin : " + origin + " is not authorized in config file"
 		res.status(401).send('not authorized')
