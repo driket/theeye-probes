@@ -49,9 +49,6 @@ class security_updates extends Probe
 				values = stdout.split(';')
 				packages = values[0]
 				security = values[1]
-				console.log values
-				console.log packages
-				console.log security
 				callback(security , packages)
 			catch err
 				console.log 'error ' + err
