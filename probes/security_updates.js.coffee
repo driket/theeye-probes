@@ -20,7 +20,7 @@ class security_updates extends Probe
 					'uri'					: 'security',
 					'min'					:	'0',
 					'max'					:	'50',
-					'interval'		: '3600',
+					'interval'		: '10',
 					'thresholds'	:	[],
 				},
 			]
