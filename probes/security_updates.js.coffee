@@ -21,7 +21,10 @@ class security_updates extends Probe
 					'min'					:	'0',
 					'max'					:	'10',
 					'interval'		: '10',
-					'thresholds'	:	[],
+					'thresholds'	:	[
+						{'operator':'>', 'value':'0', 'type':'alert'},
+					],
+
 				},
 			]
 		)	
