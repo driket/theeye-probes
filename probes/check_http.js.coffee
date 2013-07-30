@@ -38,28 +38,30 @@ class check_http extends Probe
 	
 	probe.listen 'http', (req, res) =>
 		
-		if !processing
+		url = req.query.site
 		
-			processing = true
-			check_http::get_http "https://puppetdashboard.myvitrine.com", (status, response_time) =>
+		#if !processing
+		
+		processing = true
+		check_http::get_http url, (status, response_time) =>
+		
+			processing = false
 			
-				processing = false
-				
-				if status == 404
-					response_time = -1
-				
-				res.send JSON.stringify	(	
-					{ 'value' : response_time, 
-					'details' : {'status':status, 'time':response_time + 'ms'},
-					'date'		: new Date()} 
-				)
+			if status == 404
+				response_time = -1
+			
+			res.send JSON.stringify	(	
+				{ 'value' : response_time, 
+				'details' : {'status':status, 'time':response_time + 's'},
+				'date'		: new Date()} 
+			)
 			
 			
 	get_http: (url, callback) =>
 		
 		start_check_time = new Date().getTime()
 		
-		if url.substring(0, 5)
+		if url.substring(0, 5) == 'https'
 			protocol = https
 		else
 			protocol = http
