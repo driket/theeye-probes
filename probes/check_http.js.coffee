@@ -11,10 +11,7 @@ class check_http extends Probe
 		description:	'Monitor HTTP(S) response time',
 		path: 				this.name,
 	}
-	
-	processing 				= false
-	start_check_time 	= Date.now()
-	
+		
 	probe.listen 'index', (req, res) =>
 		res.send JSON.stringify	(
 			[
@@ -40,14 +37,11 @@ class check_http extends Probe
 		
 		url 		= req.query.site
 		content = req.query.content || ''
-		console.log req.query
-		#if !processing
 		
-		processing = true
+		start_check_time 	= Date.now()
+		
 		check_http::get_http url, content, (status, response_time) =>
 		
-			processing = false
-			
 			if status == 404
 				response_time = -1
 			
