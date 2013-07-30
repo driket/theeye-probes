@@ -15,7 +15,7 @@ class security_updates extends Probe
 		res.send JSON.stringify	(
 			[
 				{ 
-					'title'				: 'Security updates availabes - debian/ubuntu',
+					'title'				: 'Available security updates - debian/ubuntu',
 					'unit'				: 'updates',
 					'uri'					: 'security',
 					'min'					:	'0',
