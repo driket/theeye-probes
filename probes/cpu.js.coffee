@@ -21,7 +21,7 @@ class cpu extends Probe
 					'max'					:	'100',
 					'interval'		: '2',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'90', 'type':'warning'},
+						{'operator':'>=', 'value':'95', 'type':'warning'},
 					],
 				},
 			]
