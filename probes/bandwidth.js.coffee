@@ -21,7 +21,9 @@ class bandwidth extends Probe
 					'min'					:	'0',
 					'max'					:	'10000',
 					'interval'		: '5',
-					'thresholds'	:	[],
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'150', 'type':'warning'},
+					],
 				},
 				{ 
 					'title'				: 'Bandwidth - reception',
@@ -30,7 +32,9 @@ class bandwidth extends Probe
 					'min'					:	'0',
 					'max'					:	'10000',
 					'interval'		: '5',
-					'thresholds'	:	[],
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'150', 'type':'warning'},
+					],
 				},
 				{ 
 					'title'				: 'Bandwidth - total',
@@ -39,7 +43,9 @@ class bandwidth extends Probe
 					'min'					:	'0',
 					'max'					:	'10000',
 					'interval'		: '5',
-					'thresholds'	:	[],
+					'thresholds'	:	[
+						{'operator':'>=', 'value':'150', 'type':'warning'},
+					],
 				},				
 			]
 		)	
