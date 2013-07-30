@@ -38,26 +38,29 @@ class check_http extends Probe
 	
 	probe.listen 'http', (req, res) =>
 		
-		url = req.query.site
-		
+		url 		= req.query.site
+		content = req.query.content || ''
+		console.log req.query
 		#if !processing
 		
 		processing = true
-		check_http::get_http url, (status, response_time) =>
+		check_http::get_http url, content, (status, response_time) =>
 		
 			processing = false
 			
 			if status == 404
 				response_time = -1
 			
+			details = {'status':status, 'time':response_time + 's'}
+			details.checked = content if content != ''
 			res.send JSON.stringify	(	
 				{ 'value' : response_time, 
-				'details' : {'status':status, 'time':response_time + 's'},
+				'details' : details,
 				'date'		: new Date()} 
 			)
 			
 			
-	get_http: (url, callback) =>
+	get_http: (url, check_content, callback) =>
 		
 		start_check_time = new Date().getTime()
 		
@@ -66,10 +69,30 @@ class check_http extends Probe
 		else
 			protocol = http
 		
+		body = ""
+		
 		protocol.get url, (res) =>
 			
-			elapased_time = (new Date().getTime() - start_check_time) / 1000
-			callback(res.statusCode, elapased_time)
+			
+			# get chunk of body
+			res.on 'data', (chunk) =>
+				
+				body += chunk
+				
+			# check body
+			res.on 'end', =>
+
+				elapased_time = (new Date().getTime() - start_check_time) / 1000
+				if check_content == ''
+					console.log "no content to check in #{url}"
+					callback(res.statusCode, elapased_time)
+				else if body.indexOf(check_content) != -1
+					callback(res.statusCode, elapased_time)
+				else
+					callback(res.statusCode, -1)					
+						
+				#else
+				#	callback(404, -1)
 			
 		.on 'error', (e) =>
 			
