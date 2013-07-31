@@ -25,7 +25,7 @@ class check_http extends Probe
 					'thresholds'	:	[
 						{'operator':'<', 	'value':'0', 	'alert':'alert'},
 						{'operator':'>=', 'value':'10', 'alert':'alert'},
-						{'operator':'>=', 'value':'5', 	'alert':'warning'},
+						{'operator':'>=', 'value':'1', 	'alert':'warning'},
 					],
 					'args'				: true,
 				},	
