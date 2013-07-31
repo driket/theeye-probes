@@ -22,7 +22,7 @@ class bandwidth extends Probe
 					'max'					:	'10000',
 					'interval'		: '5',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'150', 'type':'warning'},
+						{'operator':'>=', 'value':'150', 'alert':'warning'},
 					],
 				},
 				{ 
@@ -33,7 +33,7 @@ class bandwidth extends Probe
 					'max'					:	'10000',
 					'interval'		: '5',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'150', 'type':'warning'},
+						{'operator':'>=', 'value':'150', 'alert':'warning'},
 					],
 				},
 				{ 
@@ -44,7 +44,7 @@ class bandwidth extends Probe
 					'max'					:	'10000',
 					'interval'		: '5',
 					'thresholds'	:	[
-						{'operator':'>=', 'value':'150', 'type':'warning'},
+						{'operator':'>=', 'value':'150', 'alert':'warning'},
 					],
 				},				
 			]

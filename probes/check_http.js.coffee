@@ -20,12 +20,12 @@ class check_http extends Probe
 					'unit'				: 's',
 					'uri'					: 'http',
 					'min'					:	'0',
-					'max'					:	'10',
+					'max'					:	'3',
 					'interval'		: '10',
 					'thresholds'	:	[
-						{'operator':'<', 'value':'0', 'type':'alert'},
-						{'operator':'>=', 'value':'10', 'type':'alert'},
-						{'operator':'>=', 'value':'5', 'type':'warning'},
+						{'operator':'<', 	'value':'0', 	'alert':'alert'},
+						{'operator':'>=', 'value':'10', 'alert':'alert'},
+						{'operator':'>=', 'value':'5', 	'alert':'warning'},
 					],
 					'args'				: true,
 				},	
@@ -78,7 +78,7 @@ class check_http extends Probe
 
 				elapased_time = (new Date().getTime() - start_check_time) / 1000
 				if check_content == ''
-					console.log "no content to check in #{url}"
+					#console.log "no content to check in #{url}"
 					callback(res.statusCode, elapased_time)
 				else if body.indexOf(check_content) != -1
 					callback(res.statusCode, elapased_time)

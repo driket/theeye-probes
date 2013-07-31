@@ -22,7 +22,7 @@ class security_updates extends Probe
 					'max'					:	'20',
 					'interval'		: '10',
 					'thresholds'	:	[
-						{'operator':'>', 'value':'0', 'type':'alert'},
+						{'operator':'>', 'value':'0', 'alert':'alert'},
 					],
 
 				},
